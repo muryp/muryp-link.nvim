@@ -1,7 +1,20 @@
-local checkLink = require('nvim-muryp-md.link.check')
-local mergeTable = require('nvim-muryp-md.helper.mergeTable')
-local configs = require('nvim-muryp-md').configs
+local checkLink = require('muryp-link.check')
+local configs   = require('muryp-link').configs
 
+---merge table into one
+---@param table table[] - exam = {table1,table2,table3}
+local function mergeTable(table)
+  local MERGE_TABLE = {}
+  for i = 1, #table do
+    if table[i] == nil then
+      return false
+    end
+    for j = 1, #table[i] do
+      MERGE_TABLE[#MERGE_TABLE + 1] = table[i][j]
+    end
+  end
+  return MERGE_TABLE
+end
 ---@param TABLE_LINK_MD_WIKI {startCol:integer, endCol:integer}[]|false
 ---@param startCol number
 ---@param endCol number

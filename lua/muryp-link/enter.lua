@@ -1,6 +1,6 @@
-local CheckLink  = require('nvim-muryp-md.link.check')
-local createLink = require('nvim-muryp-md.link.create')
-local configs    = require('nvim-muryp-md').configs
+local CheckLink  = require('muryp-link.check')
+local createLink = require('muryp-link.create')
+local configs    = require('muryp-link').configs
 
 ---@param args 'open'|'enter'
 ---@return nil - open/create link/show err

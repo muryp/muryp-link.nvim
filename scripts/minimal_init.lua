@@ -19,6 +19,7 @@ _G.test = function(expect, result)
   if expect ~= result then
     print('Expect : ' .. expect)
     print('result : ' .. result)
+    error()
   end
 end
 _G.space_opts()

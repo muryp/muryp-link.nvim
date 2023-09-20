@@ -1,0 +1,21 @@
+hello https://domain.com end
+hello https://www.domain.com end
+hello http://domain.com end
+hello http://www.my-domain.com end
+hello http://www.blog.my-domain.com end
+hello www.domain.com end
+hello domain.com end
+hello [this link](./link)  end
+hello [this link](./link) [this link2](./link2) end
+hello [[th(is) link]](./link) ) [this link2](./link2) [[link3]]end
+hello [[thlink]]end
+hello [this link](./folder/subFolder/file)  end
+
+transform :
+text1[link1](link1)text2[link2](link2)text3[link3](link3)
+text1[text link1](link1)text2[text link2](link2)text3[text link3](link3)
+[link]
+
+visual :
+LInk this
+[link this](https://domain.com)

@@ -28,9 +28,7 @@ local function cekNotConflictWithMdWiki(startCol, endCol, TABLE_LINK_MD_WIKI)
   ---loop list link and slice range
   local function loopCek()
     local LINK_MD_WIKI = TABLE_LINK_MD_WIKI[CURRENT_LOOP]
-    print('---table : ' .. CURRENT_LOOP)
     CURRENT_LOOP = CURRENT_LOOP + 1
-    print(startCol, endCol)
     if LINK_MD_WIKI == nil then
       return
     end
@@ -39,8 +37,6 @@ local function cekNotConflictWithMdWiki(startCol, endCol, TABLE_LINK_MD_WIKI)
     local isOnFirst = LINK_MD_WIKI.startCol >= endCol
 
     if isTableOnRange and isOnFirst then
-      print('---is first')
-      print(startCol, endCol)
       endCol = LINK_MD_WIKI.startCol - 1
       return
     end
@@ -52,9 +48,6 @@ local function cekNotConflictWithMdWiki(startCol, endCol, TABLE_LINK_MD_WIKI)
       local isOnBackLink = LINK_MD_WIKI.endCol < CURRENT_LINE
       if isOnFrontLink then
         endCol = LINK_MD_WIKI.startCol - 1
-        print('---is frontlink')
-        print(startCol, endCol)
-        print(vim.inspect(LINK_MD_WIKI))
         return loopCek()
       end
       if isOnBackLink then
@@ -106,15 +99,27 @@ local getText = function()
     local val = LINE_CONTENT:sub(startCol, endCol)
     if val then
       local result = { startCol = startCol, endCol = endCol, val = val }
-      print(vim.inspect(result))
       return result
     end
     return
   end
 end
 
+local function get_current_line_and_column_text()
+  -- Get the current line number and column
+  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+  -- Get the text of the current line
+  local line_text = vim.api.nvim_get_current_line()
+  -- Get the character at the specified column
+  local char = line_text:sub(col, col)
+  return char
+end
+
 ---@return string|nil - return link url/file
 local function createLink()
+  if get_current_line_and_column_text() == ' ' then
+    return
+  end
   local CHEK_LINK = checkLink.isLink()
   -- is cursor is link
   if CHEK_LINK then

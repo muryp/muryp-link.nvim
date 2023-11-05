@@ -33,7 +33,7 @@ M.setup = function(args)
       M.configs.maps.unlink = args.maps.unlink
     end
   end
-  vim.keymap.set('n', M.configs.maps.undoLink, function()
+  vim.keymap.set('n', M.configs.maps.unlink, function()
     M.unlink()
   end)
   vim.keymap.set('n', M.configs.maps.enter, function()

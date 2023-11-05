@@ -20,7 +20,7 @@ local DEFAULT_CONFIGS = {
   end,
   maps = {
     enter = '<CR>',
-    undoLink = '<leader><CR>',
+    unlink = '<leader><CR>',
   },
 }
 

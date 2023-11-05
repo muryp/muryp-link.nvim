@@ -1,0 +1,9 @@
+[[LINK_MD]]
+[[LINK_MD2.md]]
+[[sub/LINK_MD.md]]
+[[./sub/LINK_MD2.md]]
+[[/example/sub/LINK_MD3.md]]
+[text link1](link1)
+[text link1](https://example.com)
+[[https://example.com]]
+https://example.com

@@ -23,7 +23,6 @@ describe('enter link/text', function()
       enter('enter', true)
       local getFile = vim.fn.expand('%:f')
       local result = string.match(getFile, '.*/(' .. fileExpect .. ')') or getFile
-      print('-------- on test ---------')
       _G.test(fileExpect, result)
     end)
   end

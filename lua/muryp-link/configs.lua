@@ -19,16 +19,8 @@ local DEFAULT_CONFIGS = {
     return true
   end,
   maps = {
-    enter = {
-      '<CR>', function()
-      require('muryp-link.enter')('enter')
-    end
-    },
-    undoLink = {
-      '<leader><CR>', function()
-      require('muryp-link.unlink')
-    end
-    },
+    enter = '<CR>',
+    undoLink = '<leader><CR>',
   },
 }
 

@@ -1,16 +1,18 @@
 local LINK_DEFAULT_CONFIGS = require 'muryp-link.configs'
-local M                    = {}
+local M = {}
 
-M.configs                  = LINK_DEFAULT_CONFIGS
+M.configs = require 'muryp-link.configs'
+M.unlink = require 'muryp-link.unlink'
+M.configs = LINK_DEFAULT_CONFIGS
 
 ---@class args table
 ---@field on_attach function<boolean>
 ---@field openCmd string
----@field mapd {enter:{}}
+---@field maps {enter:string,unlink:string}
 ---@field replaceFileLink fun(args:string):string
 ---@field replaceTexttoLink fun(args:string):string
 ---@param args args
-M.setup                    = function(args)
+M.setup = function(args)
   if args.openCmd then
     M.configs.openCmd = args.openCmd
   end
@@ -23,17 +25,20 @@ M.setup                    = function(args)
   if args.replaceTexttoLink then
     M.configs.replaceTexttoLink = args.replaceTexttoLink
   end
+  if args.maps then
+    if args.maps.enter then
+      M.configs.maps.enter = args.maps.enter
+    end
+    if args.maps.unlink then
+      M.configs.maps.unlink = args.maps.unlink
+    end
+  end
+  vim.keymap.set('n', M.configs.maps.undoLink, function()
+    M.unlink()
+  end)
+  vim.keymap.set('n', M.configs.maps.enter, function()
+    require 'muryp-link.enter' 'enter'
+  end)
 end
-M.check                    = require('muryp-link.check')
-M.configs                  = require('muryp-link.configs')
-M.create                   = require('muryp-link.create')
-M.unlink                   = require('muryp-link.unlink')
-M.enter                    = require('muryp-link.enter')('enter')
-M.open                     = require('muryp-link.enter')('open')
-
-local MAPS_ENTER           = M.configs.maps.enter
-local MAPS_UNLINK          = M.configs.maps.undoLink
-vim.keymap.set("n", MAPS_ENTER[1], MAPS_ENTER[2])
-vim.keymap.set("n", MAPS_UNLINK[1], MAPS_UNLINK[2])
 
 return M

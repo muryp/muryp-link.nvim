@@ -1,5 +1,4 @@
 local DEFAULT_CONFIGS = {
-  rootFolder = { '/home' },
   openCmd = '!xdg-open',
   ---@param TEXT string
   ---@return string
@@ -10,20 +9,15 @@ local DEFAULT_CONFIGS = {
   ---@param FILE string link non url (like file/slug/not contains http(s))
   ---@return string
   replaceFileLink = function(FILE)
-    if FILE:match('^.+(%..+)$') then
+    if FILE:match '^.+(%..+)$' then
       return FILE
     end
     return FILE .. '.md'
   end,
-  maps = {
-    enter = {
-      ['<CR>'] = { 'cmd', 'create link or open link' },
-      ['<leader><CR>'] = { 'cmd', 'undo link' },
-    }
-  },
+  ---@return boolean
   on_attach = function()
     return true
-  end
+  end,
 }
 
 return DEFAULT_CONFIGS

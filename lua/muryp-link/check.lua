@@ -1,17 +1,17 @@
 local M = {}
 local isRawLink = function()
-  local current_word = vim.fn.expand('<cWORD>') ---@type string
-  local REGEX_RAW_LINK = "^https?://[%w-_%.%?%.:/%+=&]+"
-  local isLinkRaw = string.match(current_word, REGEX_RAW_LINK) or
-      string.match(current_word, "^www%.[%w.-]+$") ---@type string | nil strin will return raw link select
+  local current_word = vim.fn.expand '<cWORD>' ---@type string
+  local REGEX_RAW_LINK = '^https?://[%w-_%.%?%.:/%+=&]+'
+  ---@type string | nil strin will return raw link select
+  local isLinkRaw = string.match(current_word, REGEX_RAW_LINK) or string.match(current_word, '^www%.[%w.-]+$')
   if isLinkRaw then
     return { url = isLinkRaw }
   end
   return false
 end
 
-M.REGEX_MD = "%[(.-)%]%((.-)%)"
-M.REGEX_WIKI = "%[%[(.-)%]%]"
+M.REGEX_MD = '%[(.-)%]%((.-)%)'
+M.REGEX_WIKI = '%[%[(.-)%]%]'
 ---get list link md/wiki
 ---@param CONTENT_LINE string
 ---@param TYPE 'md'|'wiki'
@@ -52,7 +52,7 @@ end
 
 ---@return { text : string, url : string, isMdWiki : boolean, COL : {startCol:number,endCol:number} }|nil
 local isLinkMdWiki = function()
-  local CURRENT_COL = vim.fn.col('.') ---@type number
+  local CURRENT_COL = vim.fn.col '.' ---@type number
   local LINE_CONTENT = vim.api.nvim_get_current_line() ---@type string - get text on current line
   local LINK_MD = cekLinkMdWiki(LINE_CONTENT, CURRENT_COL, 'md')
   if LINK_MD then

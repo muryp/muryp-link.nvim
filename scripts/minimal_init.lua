@@ -1,6 +1,7 @@
 vim.cmd([[
 set rtp+=.
 set rtp+=./plenary.nvim/
+set noswapfile
 ]])
 _G.space_opts = function()
   vim.o.expandtab = true
@@ -23,3 +24,5 @@ _G.test = function(expect, result)
   end
 end
 _G.space_opts()
+
+require('muryp-link').setup({})

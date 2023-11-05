@@ -18,6 +18,18 @@ local DEFAULT_CONFIGS = {
   on_attach = function()
     return true
   end,
+  maps = {
+    enter = {
+      '<CR>', function()
+      require('muryp-link.enter')('enter')
+    end
+    },
+    undoLink = {
+      '<leader><CR>', function()
+      require('muryp-link.unlink')
+    end
+    },
+  },
 }
 
 return DEFAULT_CONFIGS

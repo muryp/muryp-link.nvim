@@ -27,6 +27,7 @@ return function(args, TEST)
     local regexPathFile = '(.*/)(.*)'
     local FOLDER ---@type string
     local FILE ---@type string
+    local HOVER_LSP ---@type boolean
     if GET_LINK:match '^..*/' then
       local FOLDER_, FILE_ = GET_LINK:match(regexPathFile)
       FOLDER = FOLDER_
@@ -41,6 +42,9 @@ return function(args, TEST)
     if string.match(FOLDER, '^%/') then
       local gitRoot = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '') ---@type string
       FOLDER = gitRoot .. FOLDER
+    elseif FOLDER:match('^file://') then
+      HOVER_LSP = true
+      FOLDER = FOLDER:gsub('^file://', '')
     else
       FOLDER = CURRENT_FOLDER .. '/' .. string.gsub(FOLDER, '^%./', '')
     end
@@ -63,7 +67,10 @@ return function(args, TEST)
         vim.cmd('e ' .. FOLDER .. FILE)
       end
     end
-    -- want create folder?
+    if HOVER_LSP then
+      local winid = vim.api.nvim_get_current_win()
+      vim.api.nvim_win_close(winid, true)
+    end
     vim.cmd('e ' .. GET_LINK)
   end
 end

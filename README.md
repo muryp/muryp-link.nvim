@@ -7,16 +7,17 @@
 [![Open Issues](https://img.shields.io/github/issues/muryp/muryp-link.nvim)](https://github.com/muryp/muryp-link.nvim/issues)
 
 # Plugin Nvim MuryP Link
-open url/path markdown, wiki, or url
+open url/path markdown, wiki, lsp hover, or url
 ## feature
 - open url/path
 - unlink md/wiki link
+- open from hover lsp
 ## requirement
 - nvim 0.8+ (recommendation)
 ## install
-- packer
+- lazy.nvim
 ```lua
-use {
+{
   'muryp/muryp-link.nvim',
   config = function()
     require('muryp-link').setup({})

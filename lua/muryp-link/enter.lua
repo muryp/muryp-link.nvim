@@ -42,7 +42,7 @@ return function(args, TEST)
     if string.match(FOLDER, '^%/') then
       local gitRoot = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '') ---@type string
       FOLDER = gitRoot .. FOLDER
-    elseif FOLDER:match('^file://') then
+    elseif FOLDER:match '^file://' then
       HOVER_LSP = true
       FOLDER = FOLDER:gsub('^file://', '')
     else

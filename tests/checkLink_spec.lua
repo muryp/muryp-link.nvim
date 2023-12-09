@@ -1,7 +1,7 @@
 ---@diagnostic disable: need-check-nil
-local checkLink = require('muryp-link.check')
+local checkLink = require 'muryp-link.check'
 describe('checklink ', function()
-  vim.cmd('e! example/link.txt')
+  vim.cmd 'e! example/link.txt'
   local TEST_CASE_FALSE = {
     { 1, 1 },
     { 7, 7 },
@@ -30,7 +30,7 @@ describe('checklink ', function()
   end
 end)
 describe('listLink ', function()
-  vim.cmd('e! example/link.txt')
+  vim.cmd 'e! example/link.txt'
   local TEST_CASE_TRUE_MD = {
     [8] = { { 7, 25 } },
     [9] = { { 7, 25 }, { 27, 47 } },
@@ -72,15 +72,15 @@ describe('checkLinkMdWiki ', function()
     { 9, 7, { text = 'this link', url = './link', isMdWiki = true, COL = { startCol = 7, endCol = 25 } } },
     { 9, 27, { text = 'this link2', url = './link2', isMdWiki = true, COL = { startCol = 27, endCol = 47 } } },
     { 10, 7, { text = '[th(is) link]', url = './link', isMdWiki = true, COL = { startCol = 7, endCol = 29 } } },
-    { 10, 55, { text ='link3', url = 'link3', isMdWiki = true, COL = { startCol = 55, endCol = 63 } } },
-    { 11, 7, { text ='thlink', url = 'thlink', isMdWiki = true, COL = { startCol = 7, endCol = 16 } } },
-    { 15, 6, { text ='link1', url = 'link1', isMdWiki = true, COL = { startCol = 6, endCol = 19 } } },
-    { 15, 25, { text ='link2', url = 'link2', isMdWiki = true, COL = { startCol = 25, endCol = 38 } } },
-    { 15, 44, { text ='link3', url = 'link3', isMdWiki = true, COL = { startCol = 44, endCol = 57 } } },
-    { 16, 6, { text ='text link1', url = 'link1', isMdWiki = true, COL = { startCol = 6, endCol = 24 } } },
-    { 16, 30, { text ='text link2', url = 'link2', isMdWiki = true, COL = { startCol = 30, endCol = 48 } } },
-    { 16, 54, { text ='text link3', url = 'link3', isMdWiki = true, COL = { startCol = 54, endCol = 72 } } },
-    { 21, 15, { text ='link this', url = 'https://domain.com', isMdWiki = true, COL = { startCol = 1, endCol = 31 } } },
+    { 10, 55, { text = 'link3', url = 'link3', isMdWiki = true, COL = { startCol = 55, endCol = 63 } } },
+    { 11, 7, { text = 'thlink', url = 'thlink', isMdWiki = true, COL = { startCol = 7, endCol = 16 } } },
+    { 15, 6, { text = 'link1', url = 'link1', isMdWiki = true, COL = { startCol = 6, endCol = 19 } } },
+    { 15, 25, { text = 'link2', url = 'link2', isMdWiki = true, COL = { startCol = 25, endCol = 38 } } },
+    { 15, 44, { text = 'link3', url = 'link3', isMdWiki = true, COL = { startCol = 44, endCol = 57 } } },
+    { 16, 6, { text = 'text link1', url = 'link1', isMdWiki = true, COL = { startCol = 6, endCol = 24 } } },
+    { 16, 30, { text = 'text link2', url = 'link2', isMdWiki = true, COL = { startCol = 30, endCol = 48 } } },
+    { 16, 54, { text = 'text link3', url = 'link3', isMdWiki = true, COL = { startCol = 54, endCol = 72 } } },
+    { 21, 15, { text = 'link this', url = 'https://domain.com', isMdWiki = true, COL = { startCol = 1, endCol = 31 } } },
   }
 
   for _, val in pairs(TEST_CASE_TRUE) do

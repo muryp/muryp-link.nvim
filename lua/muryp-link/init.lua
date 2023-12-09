@@ -11,7 +11,7 @@ M.configs = LINK_DEFAULT_CONFIGS
 ---@field maps {enter:string,unlink:string}
 ---@field replaceFileLink fun(args:string):string
 ---@field replaceTexttoLink fun(args:string):string
----@param args args
+---@param args args|Object
 M.setup = function(args)
   if args.openCmd then
     M.configs.openCmd = args.openCmd

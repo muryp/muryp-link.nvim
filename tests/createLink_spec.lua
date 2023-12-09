@@ -1,14 +1,14 @@
-local createLink = require('muryp-link.create')
+local createLink = require 'muryp-link.create'
 
 --use configs
 describe('create link ', function()
-  vim.cmd('e! example/link2.txt')
+  vim.cmd 'e! example/link2.txt'
   local RESULT_TRUE = {
-    { 1, 1,  '[hello](hello) https://domain.com end', nil },
-    { 1, 1,  '[hello](hello) https://domain.com end', 'hello' },
-    { 1, 15, '[hello](hello) https://domain.com end', nil},
+    { 1, 1, '[hello](hello) https://domain.com end', nil },
+    { 1, 1, '[hello](hello) https://domain.com end', 'hello' },
+    { 1, 15, '[hello](hello) https://domain.com end', nil },
     { 1, 16, '[hello](hello) https://domain.com end', 'https://domain.com' },
-    { 2, 1,  '[[WIKI_LINK]]',                         'WIKI_LINK' },
+    { 2, 1, '[[WIKI_LINK]]', 'WIKI_LINK' },
   }
   for _, val in pairs(RESULT_TRUE) do
     it('on line ' .. val[1] .. ' col ' .. val[2], function()

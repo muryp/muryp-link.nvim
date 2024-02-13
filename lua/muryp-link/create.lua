@@ -72,6 +72,7 @@ local getText = function()
   while CURRENT_COL > 0 do
     local PREV_COL = CURRENT_COL - 1
     local char = LINE_CONTENT:sub(PREV_COL, PREV_COL)
+    -- print(vim.inspect(char),PREV_COL,CURRENT_COL)
     startCol = CURRENT_COL
     if char == ' ' then
       break
@@ -108,6 +109,7 @@ end
 local function get_current_line_and_column_text()
   -- Get the current line number and column
   local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+  col = col + 1
   -- Get the text of the current line
   local line_text = vim.api.nvim_get_current_line()
   -- Get the character at the specified column

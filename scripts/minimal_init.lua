@@ -18,8 +18,8 @@ _G.tab_opts = function()
 end
 _G.test = function(expect, result)
   if expect ~= result then
-    print('Expect : ' .. expect)
-    print('result : ' .. result)
+    print('Expect : ' .. vim.inspect(expect))
+    print('result : ' .. vim.inspect(result))
     error()
   end
 end

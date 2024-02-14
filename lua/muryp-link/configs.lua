@@ -28,6 +28,7 @@ local DEFAULT_CONFIGS = {
   end,
   maps = {
     enter = '<CR>',
+    visual = '<CR>',
     unlink = '<leader><CR>',
   },
 }

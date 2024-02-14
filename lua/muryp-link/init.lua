@@ -39,6 +39,7 @@ M.setup = function(args)
   vim.keymap.set('n', M.configs.maps.enter, function()
     require 'muryp-link.enter' 'enter'
   end)
+  vim.keymap.set('v', M.configs.maps.visual, ":lua require('muryp-link.create')(true)<CR>")
 end
 
 return M

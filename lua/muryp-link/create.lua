@@ -117,8 +117,41 @@ local function get_current_line_and_column_text()
   return char
 end
 
+---@return nil|{[1]:string,[2]:integer,[3]:integer,[4]:integer}
+local getVisualText = function()
+  local line_start = vim.fn.line "'<"
+  local line_end = vim.fn.line "'>"
+  if line_start ~= line_end then
+    return
+  end
+  local start_col = vim.fn.col "'<"
+  local end_col = vim.fn.col "'>" - 1
+  local TEXT = vim.api.nvim_get_current_line() ---@type string - get text on current line
+  TEXT = TEXT:sub(start_col, end_col)
+  local haveLink = string.match(TEXT, checkLink.REGEX_MD)
+    or string.match(TEXT, checkLink.REGEX_WIKI)
+    or string.match(TEXT, checkLink.REGEX_RAW_LINK)
+  if TEXT ~= '' or not haveLink then
+    return { TEXT, start_col, end_col, line_start }
+  end
+end
+
+---@param ARGS {[1]:string,[2]:integer,[3]:integer,[4]:integer} - visual text
+---@return nil - create link
+local function createLinkVisual(ARGS)
+  local TEXT, start_col, end_col, line_num = unpack(ARGS)
+  TEXT = configs.replaceTexttoLink(tostring(TEXT))
+  vim.api.nvim_buf_set_text(0, line_num - 1, start_col - 1, line_num - 1, end_col, { TEXT })
+end
+
+---@param isVisual true|nil
 ---@return string|nil - return link url/file
-local function createLink()
+local function createLink(isVisual)
+  local VISUAL_TEXT = getVisualText()
+  if VISUAL_TEXT and isVisual then
+    createLinkVisual(VISUAL_TEXT)
+    return
+  end
   if get_current_line_and_column_text() == ' ' then
     return
   end

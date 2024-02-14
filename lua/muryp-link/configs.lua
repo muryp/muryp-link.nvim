@@ -3,8 +3,10 @@ local DEFAULT_CONFIGS = {
   ---@param TEXT string
   ---@return string
   replaceTexttoLink = function(TEXT)
+    ---change - to space
+    local LINK = TEXT:gsub('-', ' ')
     -- Remove symbols
-    local LINK = TEXT:gsub('[%p%c]', '')
+    LINK = LINK:gsub('[%p%c]', '')
     -- remove emoji
     LINK = LINK:gsub('[\128-\255][\128-\191]*', '')
     -- replace space

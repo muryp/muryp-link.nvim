@@ -1,9 +1,9 @@
 local M = {}
+M.REGEX_RAW_LINK = '^https?://[%w-_%.%?%.:/%+=&]+'
 local isRawLink = function()
   local current_word = vim.fn.expand '<cWORD>' ---@type string
-  local REGEX_RAW_LINK = '^https?://[%w-_%.%?%.:/%+=&]+'
   ---@type string | nil strin will return raw link select
-  local isLinkRaw = string.match(current_word, REGEX_RAW_LINK) or string.match(current_word, '^www%.[%w.-]+$')
+  local isLinkRaw = string.match(current_word, M.REGEX_RAW_LINK) or string.match(current_word, '^www%.[%w.-]+$')
   if isLinkRaw then
     return { url = isLinkRaw }
   end

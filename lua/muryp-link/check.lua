@@ -5,7 +5,7 @@ local isRawLink = function()
   ---@type string | nil strin will return raw link select
   local isLinkRaw = string.match(current_word, M.REGEX_RAW_LINK) or string.match(current_word, '^www%.[%w.-]+$')
   if isLinkRaw then
-    return { url = isLinkRaw }
+    return { url = current_word }
   end
   return false
 end

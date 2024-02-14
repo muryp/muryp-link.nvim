@@ -17,11 +17,12 @@ return function(args, TEST)
     GET_LINK = createLink()
   end
   if GET_LINK then
-    local REGEX_RAW_LINK = '^https?://[%w-_%.%?%.:/%+=&]+'
-    local isLink = string.match(GET_LINK, REGEX_RAW_LINK) ---@type string | nil strin will return raw link select
+    ---@type string | nil strin will return raw link select
+    local isLink = string.match(GET_LINK, CheckLink.REGEX_RAW_LINK)
     -- change val by configs
     if isLink then
-      vim.cmd(configs.openCmd .. ' ' .. GET_LINK)
+      -- vim.cmd(configs.openCmd .. ' ' .. GET_LINK)
+      os.execute(configs.openCmd .. ' ' .. GET_LINK)
       return
     end
     local regexPathFile = '(.*/)(.*)'

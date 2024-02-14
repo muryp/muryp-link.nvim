@@ -1,5 +1,5 @@
 local DEFAULT_CONFIGS = {
-  openCmd = '!xdg-open',
+  openCmd = 'xdg-open',
   ---@param TEXT string
   ---@return string
   replaceTexttoLink = function(TEXT)

@@ -37,8 +37,12 @@ M.setup = function(args)
     M.unlink()
   end)
   vim.keymap.set('n', M.configs.maps.enter, function()
-    require 'muryp-link.enter' 'enter'
-  end)
+    local FILE_TYPE = vim.bo.filetype
+    if FILE_TYPE == 'qf' then
+      return '<CR>'
+    end
+    return ":lua require('muryp-link.enter')('enter')<CR>"
+  end, { expr = true, replace_keycodes = true, silent = true })
   vim.keymap.set('v', M.configs.maps.visual, ":lua require('muryp-link.create')(true)<CR>")
 end
 

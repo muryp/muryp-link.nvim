@@ -33,7 +33,7 @@ local function cekNotConflictWithMdWiki(startCol, endCol, TABLE_LINK_MD_WIKI)
       return
     end
     local isTableOnRange = (LINK_MD_WIKI.startCol > startCol and LINK_MD_WIKI.startCol < endCol)
-      or (LINK_MD_WIKI.endCol > startCol and LINK_MD_WIKI.endCol < endCol)
+        or (LINK_MD_WIKI.endCol > startCol and LINK_MD_WIKI.endCol < endCol)
     local isOnFirst = LINK_MD_WIKI.startCol >= endCol
 
     if isTableOnRange and isOnFirst then
@@ -125,13 +125,17 @@ local getVisualText = function()
     return
   end
   local start_col = vim.fn.col "'<"
-  local end_col = vim.fn.col "'>" - 1
+  local end_col = vim.fn.col "'>"
   local TEXT = vim.api.nvim_get_current_line() ---@type string - get text on current line
+  -- if select one line
+  if #TEXT < end_col then
+    end_col = end_col - 1
+  end
   TEXT = TEXT:sub(start_col, end_col)
   local haveLink = string.match(TEXT, checkLink.REGEX_MD)
-    or string.match(TEXT, checkLink.REGEX_WIKI)
-    or string.match(TEXT, checkLink.REGEX_RAW_LINK)
-  if TEXT ~= '' or not haveLink then
+      or string.match(TEXT, checkLink.REGEX_WIKI)
+      or string.match(TEXT, checkLink.REGEX_RAW_LINK)
+  if TEXT ~= '' and not haveLink then
     return { TEXT, start_col, end_col, line_start }
   end
 end
@@ -148,8 +152,12 @@ end
 ---@return string|nil - return link url/file
 local function createLink(isVisual)
   local VISUAL_TEXT = getVisualText()
-  if VISUAL_TEXT and isVisual then
-    createLinkVisual(VISUAL_TEXT)
+  if isVisual then
+    if VISUAL_TEXT then
+      createLinkVisual(VISUAL_TEXT)
+      return
+    end
+    print('WARN: Cannot create link, your select have some link')
     return
   end
   if get_current_line_and_column_text() == ' ' then

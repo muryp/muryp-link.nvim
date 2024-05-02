@@ -6,3 +6,6 @@ styluaCheck:
 	stylua --color always --check lua/
 lint:
 	luacheck lua
+init:
+	ln -s ../plenary.nvim/
+	cd .git && rm -rf hooks && ln -s ../.hooks && mv .hooks hooks

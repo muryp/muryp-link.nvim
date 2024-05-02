@@ -1,4 +1,5 @@
 #!/bin/sh
 make test
 make stylua
+git add .
 make lint

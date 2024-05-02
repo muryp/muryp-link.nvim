@@ -33,7 +33,7 @@ local function cekNotConflictWithMdWiki(startCol, endCol, TABLE_LINK_MD_WIKI)
       return
     end
     local isTableOnRange = (LINK_MD_WIKI.startCol > startCol and LINK_MD_WIKI.startCol < endCol)
-        or (LINK_MD_WIKI.endCol > startCol and LINK_MD_WIKI.endCol < endCol)
+      or (LINK_MD_WIKI.endCol > startCol and LINK_MD_WIKI.endCol < endCol)
     local isOnFirst = LINK_MD_WIKI.startCol >= endCol
 
     if isTableOnRange and isOnFirst then
@@ -133,8 +133,8 @@ local getVisualText = function()
   end
   TEXT = TEXT:sub(start_col, end_col)
   local haveLink = string.match(TEXT, checkLink.REGEX_MD)
-      or string.match(TEXT, checkLink.REGEX_WIKI)
-      or string.match(TEXT, checkLink.REGEX_RAW_LINK)
+    or string.match(TEXT, checkLink.REGEX_WIKI)
+    or string.match(TEXT, checkLink.REGEX_RAW_LINK)
   if TEXT ~= '' and not haveLink then
     return { TEXT, start_col, end_col, line_start }
   end
@@ -157,7 +157,7 @@ local function createLink(isVisual)
       createLinkVisual(VISUAL_TEXT)
       return
     end
-    print('WARN: Cannot create link, your select have some link')
+    print 'WARN: Cannot create link, your select have some link'
     return
   end
   if get_current_line_and_column_text() == ' ' then

@@ -1,6 +1,7 @@
 local CheckLink = require 'muryp-link.check'
 local createLink = require 'muryp-link.create'
 local configs = require('muryp-link').configs
+local getHeadingId = require 'muryp-link.getHeadingId'
 
 ---@param args 'open'|'enter'
 ---@param TEST true|nil
@@ -37,7 +38,10 @@ return function(args, TEST)
       FOLDER = ''
       FILE = GET_LINK
     end
+    local ID_HEAD = FILE:gsub('.*#', '')
     FILE = configs.replaceFileLink(FILE)
+    -- split by hastag
+    FILE = FILE:gsub('#.*', '')
     --- cek is not root folder
     local CURRENT_FOLDER = vim.fn.expand '%:h'
     if string.match(FOLDER, '^%/') then
@@ -66,6 +70,7 @@ return function(args, TEST)
       else
         vim.fn.mkdir(FOLDER, 'p')
         vim.cmd('e ' .. FOLDER .. FILE)
+        getHeadingId(ID_HEAD)
       end
     end
     if HOVER_LSP then
@@ -73,5 +78,6 @@ return function(args, TEST)
       vim.api.nvim_win_close(winid, true)
     end
     vim.cmd('e ' .. GET_LINK)
+    getHeadingId(ID_HEAD)
   end
 end
